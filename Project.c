@@ -14,74 +14,7 @@
 // arquivo .pio
 #include "build/Project.pio.h"
 
-// Limite X
-double desenhoX[25] = {1.0, 0.0, 0.0, 0.0, 1.0,
-                       0.0, 1.0, 0.0, 1.0, 0.0,
-                       0.0, 0.0, 1.0, 0.0, 0.0,
-                       0.0, 1.0, 0.0, 1.0, 0.0,
-                       1.0, 0.0, 0.0, 0.0, 1.0};
-// Numero 0
-double desenho0[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-// Numero 1
-double desenho1[25] = {0.0, 0.0, 0.2, 0.0, 0.0,
-                       0.0, 0.0, 0.2, 0.2, 0.0,
-                       0.0, 0.0, 0.2, 0.0, 0.0,
-                       0.0, 0.0, 0.2, 0.0, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-// Numero 2
-double desenho2[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.0, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-// Numero 3
-double desenho3[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-// Nuemro 4
-double desenho4[25] = {0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.0, 0.0, 0.2, 0.0};
-// Numero 5
-double desenho5[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.0, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-// Numero 6
-double desenho6[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.0, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-// Numero 7
-double desenho7[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.0, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.0, 0.0, 0.2, 0.0};
-// Numero 8
-double desenho8[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-// Numero 9
-double desenho9[25] = {0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.2, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0,
-                       0.0, 0.2, 0.0, 0.0, 0.0,
-                       0.0, 0.2, 0.2, 0.2, 0.0};
-
-double *desenhos[] = {desenho0, desenho1, desenho2, desenho3, desenho4, desenho5, desenho6, desenho7, desenho8, desenho9, desenhoX};
+#include "lib/matrix_numbers.h"
 
 // rotina para acionar a matrix de leds - ws2812b
 void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b);
@@ -113,6 +46,8 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
 #define EIXO_X 26         // GPIO para eixo X
 #define EIXO_Y 27         // GPIO para eixo Y
 #define BOTAO_JOYSTICK 22 // GPIO para botão do joystick
+uint16_t valor_x;
+uint16_t valor_y;
 
 // display
 ssd1306_t display;
@@ -122,6 +57,13 @@ bool leds_ativos = true;
 bool estado_led_verde = false;
 bool cor = true;
 
+// Matriz
+PIO pio = pio0;
+uint16_t i;
+uint32_t valor_led;
+double r = 0.0, b = 0.0, g = 0.0;
+uint sm;
+
 // Variável para debounce da interrupção
 static volatile uint64_t last_interrupt_time = 0;
 static volatile bool interrupt_flag = false; // Sinalizador da interrupção
@@ -130,6 +72,11 @@ static volatile bool btnA = false, btnB = false;
 static volatile uint64_t last_interrupt_time_A = 0;
 static volatile uint64_t last_interrupt_time_B = 0;
 static volatile uint64_t last_interrupt_time_JoyStick = 0;
+
+// Senha no display
+static volatile int16_t senha[4];
+static volatile int16_t senhaCerta[4] = {1, 2, 3, 4};
+static volatile int16_t contSenha = 0;
 
 // Função para inicialização dos pinos
 void inicializar_pinos();
@@ -150,33 +97,26 @@ void configurar_pwm(uint gpio);                 // Configuração do PWM
 void atualizar_display(uint16_t x, uint16_t y); // Atualiza a exibição no display
 uint16_t calcular_pwm(uint16_t valor);          // Calcula o nível PWM com base na posição do joystick
 
+// Funções do Buzzer
+void beep(uint freq, uint duration);
+int64_t beep_stop_callback(alarm_id_t id, void *user_data);
+
 // função principal
 int main()
 {
-    PIO pio = pio0;
-    uint16_t i;
-    uint32_t valor_led;
-    double r = 0.0, b = 0.0, g = 0.0;
-
     // Inicializa todos os códigos stdio padrão que estão ligados ao binário.
     stdio_init_all();
     inicializar_pinos();
-
-    // configurações da PIO
-    uint offset = pio_add_program(pio, &pio_matrix_program);
-    uint sm = pio_claim_unused_sm(pio, true);
-    pio_matrix_program_init(pio, sm, offset, OUT_PIN);
+    ConfigurarDisplay();
 
     desenho_pio(desenho0, valor_led, pio, sm, r, g, b);
 
-    // Interrupção para botão do JoyStick
-    gpio_set_irq_enabled_with_callback(BOTAO_JOYSTICK, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
     while (true)
     {
         adc_select_input(0);
-        uint16_t valor_x = adc_read();
+        valor_x = adc_read();
         adc_select_input(1);
-        uint16_t valor_y = adc_read();
+        valor_y = adc_read();
 
         if (!gpio_get(BTN_PIN_A) && a < 10)
         {
@@ -190,11 +130,9 @@ int main()
             // Configuração da interrupção para o botão B (borda de subida e descida)
             gpio_set_irq_enabled_with_callback(BTN_PIN_B, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
         }
-
-        if (a >= 0 && a <= 9)
+        else if (!gpio_get(BOTAO_JOYSTICK))
         {
-            // Chamada da função para imprimir os desenhos
-            desenho_pio(desenhos[a], valor_led, pio, sm, r, g, b);
+            gpio_set_irq_enabled_with_callback(BOTAO_JOYSTICK, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
         }
 
         if (valor_x >= 2000 && valor_x <= 2140 && valor_y >= 1870 && valor_y <= 2010)
@@ -208,7 +146,6 @@ int main()
             pwm_set_gpio_level(LED_AZUL, calcular_pwm(valor_y));
         }
         atualizar_display(valor_x, valor_y);
-        sleep_ms(100);
     }
 }
 
@@ -223,6 +160,13 @@ void inicializar_pinos()
     gpio_set_dir(LED_VERDE, GPIO_OUT);
     gpio_init(LED_AZUL);
     gpio_set_dir(LED_AZUL, GPIO_OUT);
+
+    // Inicializar Buzzer como PWM
+    gpio_set_function(buzz, GPIO_FUNC_PWM);
+    uint slice = pwm_gpio_to_slice_num(buzz);
+    pwm_set_clkdiv(slice, 16.0); // Ajuste do divisor do clock
+    uint32_t periodo_pwm = 125000000 / 1000;
+    pwm_set_wrap(slice, periodo_pwm);
 
     // Inicialização dos botões como entrada
     gpio_init(BTN_PIN_A);
@@ -245,6 +189,11 @@ void inicializar_pinos()
     // Configurar leds no PWM
     configurar_pwm(LED_AZUL);
     configurar_pwm(LED_VERMELHO);
+
+    // configurações da PIO
+    uint offset = pio_add_program(pio, &pio_matrix_program);
+    sm = pio_claim_unused_sm(pio, true);
+    pio_matrix_program_init(pio, sm, offset, OUT_PIN);
 }
 // Função para ligar os leds solicitados
 void set_leds(bool red, bool green, bool blue)
@@ -259,23 +208,68 @@ static void gpio_irq_handler(uint gpio, uint32_t events)
 {
     uint64_t current_time = to_ms_since_boot(get_absolute_time()); // Obtém o tempo atual em milissegundos desde o boot do Raspberry Pi Pico
 
-    if (gpio == BTN_PIN_A && (current_time - last_interrupt_time_A) > DEBOUNCE_DELAY)
+    if (gpio == BTN_PIN_A)
     {
-        if (a <= 9)
-            a++; // Incrementa o número
-        last_interrupt_time_A = current_time;
-        printf("a incrementado para: %i\n", a);
+        if ((current_time - last_interrupt_time_A) > DEBOUNCE_DELAY)
+        {
+            if (a <= 9)
+            {
+                a++;                                                   // Incrementa o número
+                desenho_pio(desenhos[a], valor_led, pio, sm, r, g, b); // Chamada da função para imprimir os desenhos
+            }
+            last_interrupt_time_A = current_time;
+            printf("a incrementado para: %i\n", a);
+        }
     }
-    else if (gpio == BTN_PIN_B && (current_time - last_interrupt_time_B) > DEBOUNCE_DELAY)
+    else if (gpio == BTN_PIN_B)
     {
-        if (a >= 0)
-            a--; // Decrementa o número
-        last_interrupt_time_B = current_time;
-        printf("a decrementado para: %i\n", a);
+        if ((current_time - last_interrupt_time_B) > DEBOUNCE_DELAY)
+        {
+            if (a > 0)
+            {
+                a--;                                                   // Decrementa o número
+                desenho_pio(desenhos[a], valor_led, pio, sm, r, g, b); // Chamada da função para imprimir os desenhos
+            }
+            last_interrupt_time_B = current_time;
+            printf("a decrementado para: %i\n", a);
+        }
     }
-    else if (gpio == BOTAO_JOYSTICK && (current_time - last_interrupt_time_JoyStick) > DEBOUNCE_DELAY)
+    else if (gpio == BOTAO_JOYSTICK)
     {
+        if ((current_time - last_interrupt_time_JoyStick) > DEBOUNCE_DELAY)
+        {
+            if (contSenha < 4)
+            {
+                senha[contSenha] = a;
+            }
 
+            contSenha++;
+
+            if (contSenha == 5) // Após inserir os 5 dígitos
+            {
+                bool senhaCorreta = true;
+                for (int i = 0; i < 4; i++)
+                {
+                    if (senha[i] != senhaCerta[i])
+                    {
+                        senhaCorreta = false;
+                        break;
+                    }
+                }
+
+                if (senhaCorreta)
+                {
+                    beep(1000, 500); // Toca um beep de 500ms a 1kHz
+                }
+
+                // Resetar senha após verificação
+                contSenha = 0;
+                for (int i = 0; i < 4; i++)
+                {
+                    senha[i] = 0;
+                }
+            }
+        }
         last_interrupt_time_JoyStick = current_time;
     }
 }
@@ -325,14 +319,18 @@ void ConfigurarDisplay()
 // Atualiza as informações do display
 void atualizar_display(uint16_t x, uint16_t y)
 {
-    char str_x[5], str_y[5];
+    char str_x[5], str_y[5], str_senha[5];
     sprintf(str_x, "%d", x);
     sprintf(str_y, "%d", y);
-    ssd1306_draw_string(&display, "EIXO X:", 8, 30);
-    ssd1306_draw_string(&display, str_x, 60, 30);
-    ssd1306_draw_string(&display, "EIXO Y:", 8, 45);
-    ssd1306_draw_string(&display, str_y, 60, 45);
+    sprintf(str_senha, "%d%d%d%d", senha[0], senha[1], senha[2], senha[3]);
 
+    ssd1306_fill(&display, false);
+    ssd1306_draw_string(&display, "X:", 10, 10);
+    ssd1306_draw_string(&display, str_x, 40, 10);
+    ssd1306_draw_string(&display, "Y:", 10, 25);
+    ssd1306_draw_string(&display, str_y, 40, 25);
+    ssd1306_draw_string(&display, "SENHA:", 10, 40);
+    ssd1306_draw_string(&display, str_senha, 70, 40);
     ssd1306_send_data(&display);
 }
 
@@ -347,4 +345,31 @@ uint16_t calcular_pwm(uint16_t valor)
     {
         return (2048 - valor) * 2;
     }
+}
+
+volatile bool beep_ativo = false;
+
+void beep(uint freq, uint duration)
+{
+    if (!beep_ativo)
+    {
+        beep_ativo = true;
+        uint slice = pwm_gpio_to_slice_num(buzz);
+        pwm_set_wrap(slice, 125000000 / freq);
+        pwm_set_gpio_level(buzz, (125000000 / (freq * 2)) / 2); // Garante um ciclo de trabalho de 50%
+        pwm_set_enabled(slice, true);
+
+        // Timer para desligar o buzzer após "duration" milissegundos
+        add_alarm_in_ms(duration, beep_stop_callback, NULL, false);
+    }
+}
+
+// Callback para desligar o beep
+int64_t beep_stop_callback(alarm_id_t id, void *user_data)
+{
+    uint slice = pwm_gpio_to_slice_num(buzz);
+    pwm_set_gpio_level(buzz, 0); // Garante que o buzzer pare
+    pwm_set_enabled(slice, false);
+    beep_ativo = false;
+    return 0;
 }

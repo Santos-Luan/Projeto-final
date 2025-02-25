@@ -41,6 +41,8 @@
     "project.pio.h": "c",
     "time.h": "c",
     "adc.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "i2c.h": "c",
+    "pwm.h": "c"
   }
 }
