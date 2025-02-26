@@ -38,3 +38,7 @@ O código é organizado em funções que gerenciam diferentes aspectos do projet
    git clone https://github.com/Santos-Luan/Projeto-final.git
    cd Projeto-final
    ```
+
+## Video de demonstração
+[🎥 Assista a demonstração no YouTube! 🚀](https://youtu.be/_K_sE4lc1q0)
+
