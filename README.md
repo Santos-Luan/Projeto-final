@@ -1,4 +1,4 @@
-# 🌟 Projeto: Controle de LEDs com Raspberry Pi Pico W
+# 🌟 Projeto: Simulação de controle de acesso com Raspberry Pi Pico W
 
 ## 📖 Descrição
 
